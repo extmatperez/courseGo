@@ -17,4 +17,6 @@ func main() {
 	var presion float32 = 925.95
 
 	fmt.Printf("La temperatura es %.2f con una humedad del %.2f a una presión atmosférica del %.2f", temperatura, humedad, presion)
+
+	//Las tres de tipo flotante
 }
