@@ -1,16 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"unsafe"
+)
 
 func main() {
 
 	var myMapSinMake = map[string]int{}
-	myMapConMake := make(map[string]string)
+	myMapConMake := make(map[string]int)
 
 	fmt.Println(myMapSinMake)
 	fmt.Printf("%T\n", myMapSinMake)
+	fmt.Printf("%d SinMake\n", unsafe.Sizeof(myMapSinMake))
+
 	fmt.Println(myMapConMake)
 	fmt.Printf("%T\n", myMapConMake)
+	fmt.Printf("%d ConMake\n", unsafe.Sizeof(myMapConMake))
 
 	var students = map[string]int{"Matias": 26, "Juan": 25}
 	fmt.Println(students["Benjamin"])
