@@ -21,8 +21,9 @@ func main() {
 	var empleados = []string{}
 
 	cantidad := 0
-
-	for k, v := range employees {
+	var k string
+	var v int
+	for k, v = range employees {
 		if v > 21 {
 			cantidad++
 			empleados = append(empleados, k)
