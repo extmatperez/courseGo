@@ -103,7 +103,7 @@ func tiempoInser(num []int, t chan float64) {
 func main() {
 	rand.Seed(int64(time.Now().UnixNano()))
 	var arreglo0, arreglo1, arreglo2 []int
-	var cant []int = []int{100, 1000, 100000}
+	var cant []int = []int{100, 1000, 10000}
 	var tiem Tiempo
 	var ini, fin time.Time
 	var tiempos []Tiempo
