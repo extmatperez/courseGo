@@ -24,6 +24,7 @@ func main() {
 	b, err := io.ReadAll(r)
 	fmt.Println(string(b), err)
 
-	// v, err = os.ReadFile(os.Stdout, "Hello world!")
+	io.WriteString(os.Stdout, "Hello world!")
+
 	// fmt.Println(string(v), err)
 }
