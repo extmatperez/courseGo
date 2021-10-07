@@ -71,6 +71,16 @@ type Mantenimiento struct {
 	Precio float64
 }
 
+func sumarCostosProd(c chan float64, tipo []Producto) {
+	c <- sumarProductos(tipo)
+}
+func sumarCostosSer(c chan float64, tipo []Servicio) {
+	c <- sumarServicios(tipo)
+}
+func sumarCostosMan(c chan float64, tipo []Mantenimiento) {
+	c <- sumarMantenimiento(tipo)
+}
+
 func main() {
 	misProductos := []Producto{
 		{"Heladera", 10000, 3},
@@ -96,5 +106,16 @@ func main() {
 
 	fin := time.Now()
 	tiempo := fin.Sub(ini)
-	fmt.Printf("Costo total: %.2f tardo: %.25f segundos", costoTotal, tiempo.Seconds())
+	fmt.Printf("Secuencial: Costo total: %.2f tardo: %.25f segundos\n", costoTotal, tiempo.Seconds())
+
+	costoTotal = 0.0
+	canal := make(chan float64)
+	ini = time.Now()
+	go sumarCostosProd(canal, misProductos)
+	go sumarCostosSer(canal, misServicios)
+	go sumarCostosMan(canal, misMantenimientos)
+	costoTotal += <-canal + <-canal + <-canal
+	fin = time.Now()
+	tiempo = fin.Sub(ini)
+	fmt.Printf("Paralelo: Costo total: %.2f tardo: %.25f segundos\n", costoTotal, tiempo.Seconds())
 }
