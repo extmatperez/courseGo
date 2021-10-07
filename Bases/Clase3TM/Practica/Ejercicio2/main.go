@@ -28,6 +28,16 @@ type Producto struct {
 	Cantidad float64 `json:"cantidad"`
 }
 
+func detalle(prod []Producto) {
+	sum := 0.0
+	fmt.Printf("%-10s%20s%10s\n", "ID", "Precio", "Cantidad")
+	for _, v := range prod {
+		sum += v.Precio * v.Cantidad
+		fmt.Printf("%-10d%20.2f%10.2f\n", v.Id, v.Precio, v.Cantidad)
+	}
+	fmt.Printf("%30.2f", sum)
+}
+
 func main() {
 	data, err := os.ReadFile("./Salida2.txt")
 	if err != nil {
@@ -42,4 +52,7 @@ func main() {
 	json.Unmarshal(data, &productos)
 
 	fmt.Println(productos)
+
+	detalle(productos)
+
 }
