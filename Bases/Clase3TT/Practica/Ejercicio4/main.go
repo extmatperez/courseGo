@@ -79,14 +79,36 @@ type Tiempo struct {
 	Selec   float64
 }
 
+func tiempoBur(num []int, t chan float64) {
+	ini := time.Now()
+	burbuja(num)
+	fin := time.Now()
+	t <- (fin.Sub(ini).Seconds())
+}
+
+func tiempoSel(num []int, t chan float64) {
+	ini := time.Now()
+	seleccion(num)
+	fin := time.Now()
+	t <- (fin.Sub(ini).Seconds())
+}
+
+func tiempoInser(num []int, t chan float64) {
+	ini := time.Now()
+	insercion(num)
+	fin := time.Now()
+	t <- (fin.Sub(ini).Seconds())
+}
+
 func main() {
 	rand.Seed(int64(time.Now().UnixNano()))
 	var arreglo0, arreglo1, arreglo2 []int
-	var cant []int = []int{100, 1000, 1000000}
+	var cant []int = []int{100, 1000, 10000}
 	var tiem Tiempo
 	var ini, fin time.Time
 	var tiempos []Tiempo
-
+	fmt.Println("Tiempos secuenciales")
+	iniGen := time.Now()
 	for i := 0; i < 3; i++ {
 		arreglo0 = rand.Perm(cant[i])
 		arreglo1 = rand.Perm(cant[i])
@@ -112,15 +134,55 @@ func main() {
 
 		tiempos = append(tiempos, tiem)
 
-		b, _ := json.Marshal(tiem)
-		fmt.Println(string(b))
+		//	b, _ := json.Marshal(tiem)
+		//fmt.Println(string(b))
 	}
+	finGen := time.Now()
 
-	fmt.Println(tiempos)
+	//fmt.Println(tiempos)
 	for _, v := range tiempos {
 		b, _ := json.Marshal(v)
 		fmt.Println(string(b))
 	}
+	fmt.Println("Tardo: ", finGen.Sub(iniGen).Seconds())
+
+	tiempos = []Tiempo{}
+	fmt.Println("Tiempos Paralelos")
+	iniGen = time.Now()
+	for i := 0; i < 3; i++ {
+		arreglo0 = rand.Perm(cant[i])
+		arreglo1 = rand.Perm(cant[i])
+		arreglo2 = rand.Perm(cant[i])
+		copy(arreglo1, arreglo0)
+		copy(arreglo2, arreglo0)
+		tiem.Tamanio = cant[i]
+
+		t1 := make(chan float64)
+		go tiempoBur(arreglo0, t1)
+
+		t2 := make(chan float64)
+		go tiempoInser(arreglo1, t2)
+
+		t3 := make(chan float64)
+		go tiempoSel(arreglo2, t3)
+
+		tiem.Bur = <-t1
+		tiem.Inser = <-t2
+		tiem.Selec = <-t3
+
+		tiempos = append(tiempos, tiem)
+
+		//	b, _ := json.Marshal(tiem)
+		//fmt.Println(string(b))
+	}
+	finGen = time.Now()
+
+	//fmt.Println(tiempos)
+	for _, v := range tiempos {
+		b, _ := json.Marshal(v)
+		fmt.Println(string(b))
+	}
+	fmt.Println("Tardo: ", finGen.Sub(iniGen).Seconds())
 
 	// variable2 := rand.Perm(1000)
 	// variable3 := rand.Perm(1000000)
