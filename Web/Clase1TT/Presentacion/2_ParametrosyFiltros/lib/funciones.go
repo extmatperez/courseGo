@@ -1,3 +1,6 @@
+package lib
+
+import "github.com/gin-gonic/gin"
 
 var empleados = map[string]string{
 	"644": "Empleado A",
