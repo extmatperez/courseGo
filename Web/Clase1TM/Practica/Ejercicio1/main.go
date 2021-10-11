@@ -93,5 +93,5 @@ func main() {
 	router.GET("/usuarios", GetAll)
 
 	router.Run() // Corremos nuestro servidor sobre el puerto 8080
-	// router.Run(":23665") // Corremos nuestro servidor sobre el puerto 8080
+	// router.Run(":23665") // Corremos nuestro servidor sobre el puerto 23665
 }
