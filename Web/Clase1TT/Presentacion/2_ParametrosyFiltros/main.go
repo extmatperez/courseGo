@@ -60,11 +60,11 @@ func CrearEmpleado(ctxt *gin.Context) {
 //Esta función solo mostrará aquellos empleados activos o inactivos, dependiente del parámetro active.
 func FiltrarEmpleados(ctxt *gin.Context) {
 	var empleados []Empleado = []Empleado{{"Matias", "123", "Activo"}, {"Juan", "321", "Activo"}, {"Pedro", "0212", "Inactivo"}}
-	var filtrados []Empleado
+	var filtrados []*Empleado
 	cantidadFiltrados := 0
-	for _, e := range empleados {
+	for i, e := range empleados {
 		if ctxt.Query("active") == e.Activo {
-			filtrados = append(filtrados, e)
+			filtrados = append(filtrados, &empleados[i])
 			cantidadFiltrados++
 		}
 	}
