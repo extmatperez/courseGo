@@ -43,6 +43,7 @@ func Funcion(ctxt *gin.Context) {
 	})
 
 }
+
 func Funcion2(ctxt *gin.Context) {
 
 	// ctxt.String(200, "¡Bienvenido a la Empresa Gophers!")
@@ -51,6 +52,7 @@ func Funcion2(ctxt *gin.Context) {
 	})
 
 }
+
 func BuscarUsuarioId(ctxt *gin.Context) {
 
 	data, err := os.ReadFile("./usuarios.json")
@@ -128,14 +130,14 @@ func GetAllFiltrado(ctxt *gin.Context) {
 func main() {
 	// Crea un router con gin
 	router := gin.Default()
-
+	fmt.Println(sumar(5, 6))
 	// Captura la solicitud GET “/hello-world”
 	router.GET("/hola", Funcion)
-	router.GET("/hola:nombre", Funcion2)
+	router.GET("/hola/:nombre", Funcion2)
 	router.GET("/usuarios/:id", BuscarUsuarioId)
 	router.GET("/usuarios", GetAll)
 	router.GET("/usuarios/filtrado", GetAllFiltrado)
 
 	router.Run() // Corremos nuestro servidor sobre el puerto 8080
-	// router.Run(":23665") // Corremos nuestro servidor sobre el puerto 23665
+	// router.Run(":23665") // Corremos nuestlsro servidor sobre el puerto 23665
 }
