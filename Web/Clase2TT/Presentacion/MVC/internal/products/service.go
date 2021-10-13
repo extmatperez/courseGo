@@ -1,3 +1,5 @@
+package internal
+
 type Service interface {
 	GetAll() ([]Product, error)
 	Store(nombre, tipo string, cantidad int, precio float64) (Product, error)
@@ -36,4 +38,3 @@ func (s *service) Store(nombre, tipo string, cantidad int, precio float64) (Prod
 
 	return producto, nil
 }
- 

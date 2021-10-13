@@ -1,3 +1,5 @@
+package internal
+
 type Product struct {
 	ID    int     `json:"id"`
 	Name  string  `json:"nombre"`
@@ -34,4 +36,3 @@ func (r *repository) Store(id int, nombre, tipo string, cantidad int, precio flo
 	lastID = p.ID
 	return p, nil
 }
- 

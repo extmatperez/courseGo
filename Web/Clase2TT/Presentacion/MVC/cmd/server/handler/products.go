@@ -1,5 +1,10 @@
+package handler
 
- 
+import (
+	products "github.com/extmatperez/courseGo/Web/Clase2TT/Presentacion/MVC/internal/products"
+	"github.com/gin-gonic/gin"
+)
+
 type request struct {
 	Name  string  `json:"nombre"`
 	Type  string  `json:"tipo"`
@@ -60,5 +65,3 @@ func (c *Product) Store() gin.HandlerFunc {
 		ctx.JSON(200, p)
 	}
 }
- 
- 
