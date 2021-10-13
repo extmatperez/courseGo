@@ -7,5 +7,5 @@ import (
 func main() {
 	repo := usuarios.NewRepository()
 	serv := usuarios.NewService(repo)
-
+	handler := handler.newUser(serv)
 }
