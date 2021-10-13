@@ -14,7 +14,7 @@ type Usuario struct {
 var misUsuarios []Usuario
 var lastID int
 
-type userRepository interface {
+type Repository interface {
 	GetAll() ([]Usuario, error)
 	LoadFile() ([]Usuario, error)
 	Store(id int, nombre, apellido, email string, edad int, altura float64, activo bool, FechaDeCreacion string) (Usuario, error)
@@ -23,7 +23,7 @@ type userRepository interface {
 
 type repository struct{}
 
-func NewRepository() userRepository {
+func NewRepository() Repository {
 	return &repository{}
 }
 func (r *repository) GetAll() ([]Usuario, error) {

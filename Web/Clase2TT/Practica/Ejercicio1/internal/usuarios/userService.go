@@ -1,15 +1,15 @@
 package internal
 
-type userService interface {
+type Service interface {
 	GetAll() ([]Usuario, error)
 	LoadFile() ([]Usuario, error)
 	Store(nombre, apellido, email string, edad int, altura float64, activo bool, fechaDeCreacion string) (Usuario, error)
 }
 type service struct {
-	repository userRepository
+	repository Repository
 }
 
-func NewService(r userRepository) userService {
+func NewService(r Repository) Service {
 	return &service{
 		repository: r,
 	}
