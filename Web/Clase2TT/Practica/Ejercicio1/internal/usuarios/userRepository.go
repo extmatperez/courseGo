@@ -1,5 +1,11 @@
 package internal
 
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
 type Usuario struct {
 	ID              int     `json:"id"`
 	Nombre          string  `json:"nombre"`
@@ -30,8 +36,17 @@ func (r *repository) GetAll() ([]Usuario, error) {
 	return misUsuarios, nil
 }
 func (r *repository) LoadFile() ([]Usuario, error) {
-
-	return misUsuarios, nil
+	usr := "E:/Google Drive/DIGITAL HOUSE/Capacitacion GO/GitHub/courseGo/Web/Clase2TT/Practica/Ejercicio1/internal/usuarios/archivo/usuarios.json"
+	data, err := os.ReadFile(usr)
+	fmt.Println("Holis", len(data))
+	if err != nil {
+		return nil, err
+	} else {
+		var usuarios []Usuario
+		json.Unmarshal(data, &usuarios)
+		// ctxt.String(200, string(data))
+		return usuarios, nil
+	}
 }
 
 func (r *repository) LastID() (int, error) {

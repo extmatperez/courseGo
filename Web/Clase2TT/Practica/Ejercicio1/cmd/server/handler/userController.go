@@ -42,7 +42,36 @@ func (c *User) GetAll() gin.HandlerFunc {
 			})
 			return
 		}
-		ctx.JSON(200, p)
+		if len(p) > 0 {
+			ctx.JSON(200, p)
+		} else {
+			ctx.JSON(404, gin.H{"error": "No hay usuarios cargados"})
+		}
+	}
+}
+
+func (c *User) LoadFile() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		token := ctx.Request.Header.Get("token")
+		if token != "123456" {
+			ctx.JSON(401, gin.H{
+				"error": "token inválido",
+			})
+			return
+		}
+
+		p, err := c.service.LoadFile()
+		if err != nil {
+			ctx.JSON(404, gin.H{
+				"error": err.Error(),
+			})
+			return
+		}
+		if len(p) > 0 {
+			ctx.JSON(200, p)
+		} else {
+			ctx.JSON(404, gin.H{"error": "No hay usuarios cargados"})
+		}
 	}
 }
 
