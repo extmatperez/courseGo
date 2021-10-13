@@ -1,11 +1,13 @@
 package internal
 
 type Product struct {
-	ID    int     `json:"id"`
-	Name  string  `json:"nombre"`
-	Type  string  `json:"tipo"`
-	Count int     `json:"cantidad"`
-	Price float64 `json:"precio"`
+	ID      int     `json:"id"`
+	Name    string  `json:"nombre"`
+	Type    string  `json:"tipo"`
+	Count   int     `json:"cantidad"`
+	Price   float64 `json:"precio"`
+	Estado  bool    `json:"estado"`
+	Estado2 bool    `json:"estado2"`
 }
 
 var ps []Product
@@ -31,7 +33,7 @@ func (r *repository) LastID() (int, error) {
 }
 
 func (r *repository) Store(id int, nombre, tipo string, cantidad int, precio float64) (Product, error) {
-	p := Product{id, nombre, tipo, cantidad, precio}
+	p := Product{id, nombre, tipo, cantidad, precio, true, false}
 	ps = append(ps, p)
 	lastID = p.ID
 	return p, nil
