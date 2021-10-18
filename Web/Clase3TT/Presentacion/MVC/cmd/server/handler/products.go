@@ -1,7 +1,9 @@
 package handler
 
 import (
-	products "github.com/extmatperez/courseGo/Web/Clase2TT/Presentacion/MVC/internal/products"
+	"os"
+
+	products "github.com/extmatperez/courseGo/Web/Clase3TT/Presentacion/MVC/internal/products"
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,7 +27,7 @@ func NewProduct(p products.Service) *Product {
 func (c *Product) GetAll() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		token := ctx.Request.Header.Get("token")
-		if token != "123456" {
+		if token != os.Getenv("TOKEN") {
 			ctx.JSON(401, gin.H{
 				"error": "token inválido",
 			})
