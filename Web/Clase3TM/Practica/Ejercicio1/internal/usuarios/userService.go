@@ -4,6 +4,9 @@ type Service interface {
 	GetAll() ([]Usuario, error)
 	LoadFile() ([]Usuario, error)
 	Store(nombre, apellido, email string, edad int, altura float64, activo bool, fechaDeCreacion string) (Usuario, error)
+	Update(id int, nombre, apellido, email string, edad int, altura float64, activo bool, fechaDeCreacion string) (Usuario, error)
+	UpdateNombre(id int, nombre string) (Usuario, error)
+	Delete(id int) error
 }
 type service struct {
 	repository Repository
@@ -46,4 +49,15 @@ func (s *service) Store(nombre, apellido, email string, edad int, altura float64
 	}
 
 	return producto, nil
+}
+func (s *service) Update(id int, nombre, apellido, email string, edad int, altura float64, activo bool, fechaDeCreacion string) (Usuario, error) {
+	return s.repository.Update(id, nombre, apellido, email, edad, altura, activo, fechaDeCreacion)
+}
+
+func (s *service) UpdateNombre(id int, nombre string) (Usuario, error) {
+	return s.repository.UpdateNombre(id, nombre)
+}
+
+func (s *service) Delete(id int) error {
+	return s.repository.Delete(id)
 }
