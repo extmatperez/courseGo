@@ -3,26 +3,31 @@ package main
 import (
 	"database/sql"
 
+	"github.com/extmatperez/courseGo/5_Sprints/meli_bootcamp/cmd/server/handler"
+	"github.com/extmatperez/courseGo/5_Sprints/meli_bootcamp/internal/buyer"
 	"github.com/gin-gonic/gin"
-	_ "github.com/mattn/go-sqlite3"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
 
-	db, _ := sql.Open("sqlite3", "./meli.db")
+	// db, _ := sql.Open("sqlite3", "./meli.db")
+	db, _ := sql.Open("mysql", "root:root@/meli")
 	router := gin.Default()
 
 	// Codigo de ayuda
 	buyerRepository := buyer.NewRepository(db)
 	buyerService := buyer.NewService(buyerRepository)
-	warehouseHandler := handler.NewWarehouse(buyerService)
-	warehousesRoutes := router.Group("/api/v1/warehouses")
+	buyerHandler := handler.NewBuyer(buyerService)
+
+	buyerRoutes := router.Group("/api/v1/buyer")
 	{
-		warehousesRoutes.GET("/", warehouseHandler.GetAll())
-		warehousesRoutes.GET("/:id", warehouseHandler.Get())
-		warehousesRoutes.POST("/", warehouseHandler.Store())
-		warehousesRoutes.PATCH("/:id", warehouseHandler.Update())
-		warehousesRoutes.DELETE("/:id", warehouseHandler.Delete())
+		buyerRoutes.GET("/", buyerHandler.GetAll())
+		buyerRoutes.GET("/:id", buyerHandler.Get())
+		buyerRoutes.POST("/", buyerHandler.Store())
+		buyerRoutes.PATCH("/:id", buyerHandler.Update())
+		buyerRoutes.DELETE("/:id", buyerHandler.Delete())
 	}
 
 	router.Run()
