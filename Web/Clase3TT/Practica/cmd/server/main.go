@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/extmatperez/courseGo/Web/Clase2TT/Practica/Ejercicio1/cmd/server/handler"
+	usuarios "github.com/extmatperez/courseGo/Web/Clase3TT/Practica/internal/usuarios"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	repo := usuarios.NewRepository()
 	serv := usuarios.NewService(repo)
-	cont := handler.NewUser(serv)
+	//cont := handler.NewUser(serv)
 
 	r := gin.Default()
 	pr := r.Group("/users")
