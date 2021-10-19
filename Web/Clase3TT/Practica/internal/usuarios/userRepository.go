@@ -10,7 +10,7 @@ import (
 
 type Usuario struct {
 	ID              int     `json:"id"`
-	Nombre          string  `json:"nombre"`
+	Nombre          string  `json:"nombre" binding:"required"`
 	Apellido        string  `json:"apellido"`
 	Email           string  `json:"email"`
 	Edad            int     `json:"edad"`
