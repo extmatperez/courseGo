@@ -10,6 +10,7 @@ import (
 
 func main() {
 	err := godotenv.Load()
+	// err := godotenv.Load("Ruta")
 	if err != nil {
 		log.Fatal("error al intentar cargar archivo .env")
 	}

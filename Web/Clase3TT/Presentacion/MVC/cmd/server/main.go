@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/extmatperez/courseGo/Web/Clase2TT/Presentacion/MVC/cmd/server/handler"
-	products "github.com/extmatperez/courseGo/Web/Clase2TT/Presentacion/MVC/internal/products"
+	"github.com/extmatperez/courseGo/Web/Clase3TT/Presentacion/MVC/cmd/server/handler"
+	products "github.com/extmatperez/courseGo/Web/Clase3TT/Presentacion/MVC/internal/products"
 	"github.com/gin-gonic/gin"
 )
 
