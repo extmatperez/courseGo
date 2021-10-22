@@ -120,7 +120,8 @@ func (r *repository) Update(id int, nombre, apellido, email string, edad int, al
 func (r *repository) UpdateNombre(id int, nombreNuevo string) (Usuario, error) {
 	var user Usuario
 	updated := false
-
+	// for i := range misUsuarios {
+	misUsuarios, _ := r.GetAll()
 	for i := range misUsuarios {
 		if misUsuarios[i].ID == id {
 			misUsuarios[i].Nombre = nombreNuevo
@@ -132,7 +133,6 @@ func (r *repository) UpdateNombre(id int, nombreNuevo string) (Usuario, error) {
 	if !updated {
 		return Usuario{}, fmt.Errorf("Usuario %d no encontrado...", id)
 	}
-
 	return user, nil
 }
 
