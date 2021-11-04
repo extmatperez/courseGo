@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"fmt"
 
 	"github.com/extmatperez/courseGo/5_Sprints/meli_bootcamp/internal/domain"
 )
@@ -62,41 +61,23 @@ func (r *repository) Get(ctx context.Context, cardNumberID string) (domain.Buyer
 }
 
 func (r *repository) Exists(ctx context.Context, cardNumberID string) bool {
-	// data, err := r.GetAll(ctx)
-	// if err != nil {
-	// 	return false
-	// }
-
-	// for _, dat := range data {
-	// 	if dat.CardNumberID == cardNumberID {
-	// 		return true
-	// 	}
-	// }
-	// return false
 
 	sqlStatement := `SELECT card_number_id FROM buyer WHERE card_number_id=?;`
 	row := r.db.QueryRow(sqlStatement, cardNumberID)
 	err := row.Scan(&cardNumberID)
 
 	return err == nil
-	// if err != nil {
-	// 	return false
-	// }
-	// return true
 }
 
 func (r *repository) Save(ctx context.Context, b domain.Buyer) (int, error) {
-	fmt.Println("Estoy aqui 1 ")
 	stmt, err := r.db.Prepare("INSERT INTO buyer(`card_number_id`,`first_name`,`last_name`) VALUES (?,?,?)")
 	if err != nil {
 		return 0, err
 	}
-	fmt.Println("Estoy aqui")
 	res, err := stmt.Exec(&b.CardNumberID, &b.FirstName, &b.LastName)
 	if err != nil {
 		return 0, err
 	}
-	fmt.Println("Estoy aca")
 	id, err := res.LastInsertId()
 	if err != nil {
 		return 0, err
