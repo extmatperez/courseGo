@@ -20,7 +20,10 @@ func TestSumar(t *testing.T) {
 	if resultado != resultadoEsperado {
 		t.Errorf("Funcion suma() arrojo el resultado = %v, pero el esperado es  %v", resultado, resultadoEsperado)
 	}
+
 }
+
+//go get github.com/stretchr/testify
 
 func TestRestar(t *testing.T) {
 	// Se inicializan los datos a usar en el test (input/output)
@@ -47,7 +50,7 @@ func TestVarios(t *testing.T) {
 func TestDividir(t *testing.T) {
 	// Se inicializan los datos a usar en el test (input/output)
 	num1 := 3
-	num2 := 0
+	num2 := 2
 
 	// Se ejecuta el test
 	resultado := Dividir(num1, num2)

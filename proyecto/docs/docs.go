@@ -31,39 +31,9 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/products": {
-            "get": {
-                "description": "get products",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Products"
-                ],
-                "summary": "List products",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "token",
-                        "name": "token",
-                        "in": "header",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/web.Response"
-                        }
-                    }
-                }
-            },
+        "/personas/add": {
             "post": {
-                "description": "store products",
+                "description": "store persona",
                 "consumes": [
                     "application/json"
                 ],
@@ -71,9 +41,9 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Products"
+                    "Persona"
                 ],
-                "summary": "Store products",
+                "summary": "Store persona",
                 "parameters": [
                     {
                         "type": "string",
@@ -83,8 +53,8 @@ var doc = `{
                         "required": true
                     },
                     {
-                        "description": "Product to store",
-                        "name": "product",
+                        "description": "Persona to store",
+                        "name": "persona",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -102,9 +72,9 @@ var doc = `{
                 }
             }
         },
-        "/usuarios": {
-            "patch": {
-                "description": "modificar usuarios",
+        "/personas/get": {
+            "get": {
+                "description": "get personas",
                 "consumes": [
                     "application/json"
                 ],
@@ -112,9 +82,9 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Usuarios"
+                    "Persona"
                 ],
-                "summary": "Modificar usuarios",
+                "summary": "List personas",
                 "parameters": [
                     {
                         "type": "string",
@@ -122,15 +92,6 @@ var doc = `{
                         "name": "token",
                         "in": "header",
                         "required": true
-                    },
-                    {
-                        "description": "Usuario a modificar",
-                        "name": "usuario",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/handler.request"
-                        }
                     }
                 ],
                 "responses": {
@@ -148,23 +109,11 @@ var doc = `{
         "handler.request": {
             "type": "object",
             "properties": {
-                "activo": {
-                    "type": "boolean"
-                },
-                "altura": {
-                    "type": "number"
-                },
                 "apellido": {
                     "type": "string"
                 },
                 "edad": {
                     "type": "integer"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "fechaDeCreacion": {
-                    "type": "string"
                 },
                 "nombre": {
                     "type": "string"
@@ -175,7 +124,7 @@ var doc = `{
             "type": "object",
             "properties": {
                 "code": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "data": {},
                 "error": {
@@ -201,8 +150,8 @@ var SwaggerInfo = swaggerInfo{
 	Host:        "",
 	BasePath:    "",
 	Schemes:     []string{},
-	Title:       "Esto es un titulo",
-	Description: "Esto es una descripcion.",
+	Title:       "MELI Bootcamp API",
+	Description: "This API Handle MELI Products.",
 }
 
 type s struct{}

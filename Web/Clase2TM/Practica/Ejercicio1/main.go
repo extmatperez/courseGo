@@ -218,3 +218,35 @@ func main() {
 	router.Run() // Corremos nuestro servidor sobre el puerto 8080
 	// router.Run(":23665") // Corremos nuestlsro servidor sobre el puerto 23665
 }
+
+
+
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+type Persona struct {
+	nombre   string
+	apellido string
+	edad     int
+}
+
+func main() {
+	personita := Persona{}
+	fmt.Println(personita)
+	var personita2 Persona
+	fmt.Println(personita2)
+	personita2.apellido = "Perez"
+	fmt.Printf("personita2: %v\n", personita2)
+	fmt.Println(reflect.TypeOf(personita2))
+	fmt.Println(reflect.ValueOf(personita2))
+	fmt.Println(reflect.TypeOf(personita2).Field(0).)
+	fmt.Println(reflect.ValueOf(personita2).Field(0))
+	fmt.Println(reflect.TypeOf(personita2).Field(1))
+	fmt.Println(reflect.ValueOf(personita2).Field(1))
+	fmt.Println(reflect.TypeOf(personita2).Field(2))
+	fmt.Println(reflect.ValueOf(personita2).Field(2))
+}
