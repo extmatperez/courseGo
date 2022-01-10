@@ -46,7 +46,7 @@ func (r *repositoryProducto) GetOne(id int) models.Producto {
 func (r *repositoryProducto) SumaPorCategoria() ([]models.SumaByCategoria, error) {
 
 	var sumasPorCategorias []models.SumaByCategoria
-	rows, err := r.db.Query("SELECT c.nombre, SUM(p.precio) FROM producto p INNER JOIN categoria c on p.idcategoria = c.id GROUP BY c.nombre")
+	rows, err := r.db.Query("SELECT  c.nombre, SUM(p.precio) FROM producto p INNER JOIN categoria c on p.idcategoria = c.id GROUP BY c.nombre")
 
 	if err != nil {
 		log.Fatal(err)
